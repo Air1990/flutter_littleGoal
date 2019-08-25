@@ -19,7 +19,7 @@ class _GoalDetailPageState extends State<GoalsDetailPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Goal\' Detail'),
+        title: Text(widget.myGoal.name),
       ),
       body: Container(),
     );

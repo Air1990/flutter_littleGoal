@@ -53,6 +53,8 @@ flutter:
     - images/reading.png
     - images/custom_goal.png
     - images/finish.png
+    - images/detail_nor.png
+    - images/detail_on.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

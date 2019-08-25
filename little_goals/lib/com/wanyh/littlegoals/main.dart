@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         GOALS_DETAIL_PAGE: (context) =>
             GoalsDetailPage(myGoal: ModalRoute.of(context).settings.arguments),
       },
-      home: MyHomePage(title: 'Little Goals'),
+      home: MyHomePage(),
     );
   }
 }

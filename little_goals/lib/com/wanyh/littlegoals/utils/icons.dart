@@ -22,6 +22,22 @@ class MyIcons {
     );
   }
 
+  Image detailNor() {
+    return Image(
+      width: width,
+      height: height,
+      image: AssetImage('images/detail_nor.png'),
+    );
+  }
+
+  Image detailOn() {
+    return Image(
+      width: width,
+      height: height,
+      image: AssetImage('images/detail_on.png'),
+    );
+  }
+
   Image settingNor() {
     return Image(
       width: width,

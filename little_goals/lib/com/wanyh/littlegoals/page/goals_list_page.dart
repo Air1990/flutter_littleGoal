@@ -2,15 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:little_goals/com/wanyh/littlegoals/db/goals_helper.dart';
 import 'package:little_goals/com/wanyh/littlegoals/db/record_helper.dart';
+import 'package:little_goals/com/wanyh/littlegoals/page/setting_page.dart';
 import 'package:little_goals/com/wanyh/littlegoals/utils/const.dart';
 import 'package:little_goals/com/wanyh/littlegoals/utils/icons.dart';
 
-import 'goal_gridview.dart';
-import 'goal_listview.dart';
+import 'package:little_goals/com/wanyh/littlegoals/widget/goal_gridview.dart';
+import 'package:little_goals/com/wanyh/littlegoals/widget/goal_listview.dart';
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-  final String title;
+  MyHomePage({
+    Key key,
+  }) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -70,6 +72,40 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  Widget _getBody() {
+    switch (tabIndex) {
+      case 0:
+        return GoalGridView(myGoals, () {
+          setState(() {});
+        });
+        break;
+      case 1:
+        return GoalListView(myGoals, () {
+          setState(() {});
+        });
+        break;
+      case 2:
+        return SettingPage();
+        break;
+    }
+    return null;
+  }
+
+  String _getTitle() {
+    switch (tabIndex) {
+      case 0:
+        return 'GoalsList';
+        break;
+      case 1:
+        return 'GoalsDetail';
+        break;
+      case 2:
+        return 'Settings';
+        break;
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     if (!init) {
@@ -77,22 +113,21 @@ class _MyHomePageState extends State<MyHomePage> {
     }
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(_getTitle()),
         centerTitle: true,
       ),
-      body: tabIndex == 0
-          ? GoalGridView(myGoals, () {
-              setState(() {});
-            })
-          : GoalListView(myGoals, () {
-              setState(() {});
-            }),
+      body: _getBody(),
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: MyIcons(35, 35).goalsNor(),
             activeIcon: MyIcons(35, 35).goalsOn(),
-            title: Text("LittleGoals"),
+            title: Text("GoalsList"),
+          ),
+          BottomNavigationBarItem(
+            icon: MyIcons(35, 35).detailNor(),
+            activeIcon: MyIcons(35, 35).detailOn(),
+            title: Text("GoalsDetail"),
           ),
           BottomNavigationBarItem(
             icon: MyIcons(35, 35).settingNor(),
