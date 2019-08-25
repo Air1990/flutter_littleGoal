@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:little_goals/com/wanyh/littlegoals/db/goals_helper.dart';
+import 'package:little_goals/com/wanyh/littlegoals/utils/const.dart';
 
 class CustomPage extends StatefulWidget {
   final LittleGoal myGoal;
@@ -38,10 +39,12 @@ class CustomPageState extends State<CustomPage> {
                   : _sloganEditingController.text;
               goal.date = DateTime.now().millisecondsSinceEpoch;
               GoalsProvider dbProvider = GoalsProvider();
-              dbProvider.open('goal.db');
-              dbProvider.insert(goal);
-              dbProvider.close();
-              Navigator.of(context).pop(goal);
+              dbProvider.open(GOALS_DB_NAME).then((onValue) {
+                dbProvider.insert(goal).then((onValue) {
+                  dbProvider.close();
+                  Navigator.of(context).pop(goal);
+                });
+              });
             },
           )
         ],

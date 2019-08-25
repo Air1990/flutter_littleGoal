@@ -1,3 +1,4 @@
+import 'package:little_goals/com/wanyh/littlegoals/db/record_helper.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
@@ -45,12 +46,22 @@ class LittleGoal {
 }
 
 class GoalsProvider {
-  Database db;
+  static GoalsProvider _goalsProvider;
+  Database _db;
+
+  factory GoalsProvider() {
+    if (_goalsProvider == null) {
+      _goalsProvider = GoalsProvider._internal();
+    }
+    return _goalsProvider;
+  }
+
+  GoalsProvider._internal();
 
   Future<Database> open(String dbName) async {
     var databasesPath = await getDatabasesPath();
     String path = join(databasesPath, dbName);
-    db = await openDatabase(path, version: 1,
+    _db = await openDatabase(path, version: 1,
         onCreate: (Database db, int version) async {
       await db.execute('''
 create table $tableGoals ( 
@@ -61,21 +72,27 @@ create table $tableGoals (
   $columnSlogan text not null,
   $columnIsLocal integer not null)
 ''');
+      await db.execute('''
+create table $tableRecords (
+  $columnId integer primary key autoincrement, 
+  $columnGoalId integer not null,
+  $columnDate integer not null)
+''');
     });
-    return db;
+    return _db;
   }
 
   Future close() async {
-    db.close();
+    _db?.close();
   }
 
   Future<LittleGoal> insert(LittleGoal goal) async {
-    goal.id = await db.insert(tableGoals, goal.toMap());
+    goal.id = await _db?.insert(tableGoals, goal.toMap());
     return goal;
   }
 
   Future<List<LittleGoal>> getAllGoals() async {
-    List<Map> maps = await db.query(tableGoals);
+    List<Map> maps = await _db?.query(tableGoals);
     List<LittleGoal> goalList = List();
     for (Map map in maps) {
       goalList.add(LittleGoal.fromMap(map));
@@ -84,12 +101,12 @@ create table $tableGoals (
   }
 
   Future<int> update(LittleGoal goal) async {
-    return await db.update(tableGoals, goal.toMap(),
+    return await _db?.update(tableGoals, goal.toMap(),
         where: '$columnId=?', whereArgs: [goal.id]);
   }
 
   Future<int> delete(LittleGoal goal) async {
-    return await db
-        .delete(tableGoals, where: '$columnId=', whereArgs: [goal.id]);
+    return await _db
+        ?.delete(tableGoals, where: '$columnId=', whereArgs: [goal.id]);
   }
 }

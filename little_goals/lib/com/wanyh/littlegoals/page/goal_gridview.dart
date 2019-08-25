@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:little_goals/com/wanyh/littlegoals/db/goals_helper.dart';
-
+import 'package:little_goals/com/wanyh/littlegoals/db/record_helper.dart';
+import 'package:little_goals/com/wanyh/littlegoals/utils/const.dart';
 
 class GoalGridView extends Container {
   GoalGridView(this.myGoals, this.callback);
@@ -60,8 +61,25 @@ class GoalGridView extends Container {
             ),
           ),
           onTap: () {
-            myGoals[index].isSigned = !myGoals[index].isSigned;
-            callback();
+            GoalRecord record = GoalRecord();
+            record.goalId = myGoals[index].id;
+            record.date = DateTime.now().millisecondsSinceEpoch;
+            RecordsProvider provider = RecordsProvider();
+            provider.open(GOALS_DB_NAME).then((onValue) {
+              if (!myGoals[index].isSigned) {
+                provider.insert(record).then((onValue) {
+                  provider.close();
+                  myGoals[index].isSigned = !myGoals[index].isSigned;
+                  callback();
+                });
+              } else {
+                provider.deleteByGoalId(record.goalId).then((onValue) {
+                  provider.close();
+                  myGoals[index].isSigned = !myGoals[index].isSigned;
+                  callback();
+                });
+              }
+            });
           },
         );
       },
