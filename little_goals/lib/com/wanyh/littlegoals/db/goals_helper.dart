@@ -16,8 +16,11 @@ class LittleGoal {
   int date;
   String imageUrl;
   String slogan;
-  bool isSigned = false;
   bool isLocal = true;
+
+  bool isSigned = false;
+  int seriesSign;
+  int totalSign;
 
   Map<String, dynamic> toMap() {
     var map = <String, dynamic>{
@@ -92,7 +95,8 @@ create table $tableRecords (
   }
 
   Future<List<LittleGoal>> getAllGoals() async {
-    List<Map> maps = await _db?.query(tableGoals);
+    List<Map> maps =
+        await _db?.query(tableGoals, orderBy: '$columnId ASC');
     List<LittleGoal> goalList = List();
     for (Map map in maps) {
       goalList.add(LittleGoal.fromMap(map));

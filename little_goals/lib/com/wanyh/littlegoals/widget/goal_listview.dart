@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:little_goals/com/wanyh/littlegoals/db/goals_helper.dart';
 import 'package:little_goals/com/wanyh/littlegoals/utils/const.dart';
 
-
 class GoalListView extends ListView {
   GoalListView(this.myGoals, this.callback);
 
@@ -58,7 +57,7 @@ class GoalListView extends ListView {
                                   fontSize: 18,
                                 ),
                               ),
-                              Text('已打卡99天'),
+                              Text('已打卡${myGoals[index].totalSign}天'),
                               Text(myGoals[index].slogan)
                             ],
                           ),
@@ -72,7 +71,7 @@ class GoalListView extends ListView {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                              Text('15',
+                              Text(myGoals[index].seriesSign.toString(),
                                   style: TextStyle(
                                     color: Colors.pink,
                                     fontSize: 30,

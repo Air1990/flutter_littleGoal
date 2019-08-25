@@ -30,9 +30,7 @@ class _MyHomePageState extends State<MyHomePage> {
         myGoals = onValue;
         provider.close();
         _checkSign();
-        setState(() {
-          init = true;
-        });
+        init = true;
       });
     });
   }
@@ -47,18 +45,52 @@ class _MyHomePageState extends State<MyHomePage> {
       String dateStr;
       for (LittleGoal goal in myGoals) {
         provider.getRecords(goal.id).then((onValue) {
+          goal.totalSign = onValue.length;
+          if (onValue.length == 0) {
+            goal.seriesSign = 0;
+            setState(() {});
+            return;
+          }
+          dateTime = DateTime.fromMillisecondsSinceEpoch(onValue[0].date);
+          dateStr = '${dateTime.year}${dateTime.month}${dateTime.day}';
+          if (dateStr == targetDateStr) {
+            goal.isSigned = true;
+          }
+          int seriesSign = 1;
+          GoalRecord lastRecord;
           for (GoalRecord record in onValue) {
-            dateTime = DateTime.fromMillisecondsSinceEpoch(record.date);
-            dateStr = '${dateTime.year}${dateTime.month}${dateTime.day}';
-            if (dateStr == targetDateStr) {
-              goal.isSigned = true;
-              setState(() {});
+            if (lastRecord == null) {
+              lastRecord = record;
+              continue;
+            }
+            if (_checkSeriesSign(lastRecord, record)) {
+              seriesSign++;
+              lastRecord = record;
+            } else {
               break;
             }
           }
+          goal.seriesSign = seriesSign;
+          setState(() {});
         });
       }
     });
+  }
+
+  bool _checkSeriesSign(GoalRecord lastRecord, GoalRecord curRecord) {
+    if (lastRecord != null && curRecord != null) {
+      DateTime lastDateTime =
+          DateTime.fromMillisecondsSinceEpoch(lastRecord.date);
+      int margin = lastRecord.date -
+          curRecord.date -
+          lastDateTime.hour * 60 * 60 -
+          lastDateTime.minute * 60 -
+          lastDateTime.second;
+      if (margin < 24 * 60 * 60) {
+        return true;
+      }
+    }
+    return false;
   }
 
   _addGoals() {

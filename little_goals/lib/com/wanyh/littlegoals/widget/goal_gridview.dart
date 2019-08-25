@@ -37,7 +37,7 @@ class GoalGridView extends Container {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
                     Text(
-                      '15',
+                      myGoals[index].seriesSign.toString(),
                       style: TextStyle(
                         color: Colors.pink,
                         fontSize: 20,
@@ -70,12 +70,16 @@ class GoalGridView extends Container {
                 provider.insert(record).then((onValue) {
                   provider.close();
                   myGoals[index].isSigned = !myGoals[index].isSigned;
+                  myGoals[index].totalSign++;
+                  myGoals[index].seriesSign++;
                   callback();
                 });
               } else {
                 provider.deleteByGoalId(record.goalId).then((onValue) {
                   provider.close();
                   myGoals[index].isSigned = !myGoals[index].isSigned;
+                  myGoals[index].totalSign--;
+                  myGoals[index].seriesSign--;
                   callback();
                 });
               }

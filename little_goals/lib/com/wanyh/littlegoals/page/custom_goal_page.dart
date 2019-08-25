@@ -4,8 +4,11 @@ import 'package:little_goals/com/wanyh/littlegoals/utils/const.dart';
 
 class CustomPage extends StatefulWidget {
   final LittleGoal myGoal;
+  final int from; //0:添加页面；1:编辑页面
 
-  CustomPage({@required this.myGoal});
+  CustomPage({@required Map<String, dynamic> myArgs})
+      : myGoal = myArgs['myGoal'],
+        from = myArgs['from'];
 
   @override
   State<StatefulWidget> createState() {
@@ -20,6 +23,7 @@ class CustomPageState extends State<CustomPage> {
   @override
   Widget build(BuildContext context) {
     _nameEditingController.text = widget.myGoal.name;
+    _sloganEditingController.text = widget.myGoal.slogan;
     return Scaffold(
       appBar: AppBar(
         title: Text('Custom Goal'),
@@ -31,20 +35,34 @@ class CustomPageState extends State<CustomPage> {
               height: 20,
             ),
             onPressed: () {
-              LittleGoal goal = LittleGoal();
-              goal.name = _nameEditingController.text;
-              goal.imageUrl = widget.myGoal.imageUrl;
-              goal.slogan = _sloganEditingController.text.length == 0
-                  ? '写一句激励自己的话吧!'
-                  : _sloganEditingController.text;
-              goal.date = DateTime.now().millisecondsSinceEpoch;
-              GoalsProvider dbProvider = GoalsProvider();
-              dbProvider.open(GOALS_DB_NAME).then((onValue) {
-                dbProvider.insert(goal).then((onValue) {
-                  dbProvider.close();
-                  Navigator.of(context).pop(goal);
+              if (widget.from == 0) {
+                LittleGoal goal = LittleGoal();
+                goal.name = _nameEditingController.text;
+                goal.imageUrl = widget.myGoal.imageUrl;
+                goal.slogan = _sloganEditingController.text.length == 0
+                    ? '写一句激励自己的话吧!'
+                    : _sloganEditingController.text;
+                goal.date = DateTime.now().millisecondsSinceEpoch;
+                GoalsProvider dbProvider = GoalsProvider();
+                dbProvider.open(GOALS_DB_NAME).then((onValue) {
+                  dbProvider.insert(goal).then((onValue) {
+                    dbProvider.close();
+                    Navigator.of(context).pop(goal);
+                  });
                 });
-              });
+              } else {
+                widget.myGoal.name = _nameEditingController.text;
+                widget.myGoal.slogan = _sloganEditingController.text.length == 0
+                    ? '写一句激励自己的话吧!'
+                    : _sloganEditingController.text;
+                GoalsProvider dbProvider = GoalsProvider();
+                dbProvider.open(GOALS_DB_NAME).then((onValue) {
+                  dbProvider.update(widget.myGoal).then((onValue) {
+                    dbProvider.close();
+                    Navigator.of(context).pop(widget.myGoal);
+                  });
+                });
+              }
             },
           )
         ],

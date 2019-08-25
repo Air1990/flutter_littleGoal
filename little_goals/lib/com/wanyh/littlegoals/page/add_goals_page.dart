@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:little_goals/com/wanyh/littlegoals/db/goals_helper.dart';
 import 'package:little_goals/com/wanyh/littlegoals/utils/const.dart';
 
-
 class AddGoalsPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -12,8 +11,9 @@ class AddGoalsPage extends StatefulWidget {
 
 class AddGoalsPageState extends State<AddGoalsPage> {
   _enterCustomPage(LittleGoal goal) {
+    Map<String, dynamic> args = {'myGoal': goal, 'from': 0};
     Navigator.of(context)
-        .pushNamed(CUSTOM_GOAL_PAGE, arguments: goal)
+        .pushNamed(CUSTOM_GOAL_PAGE, arguments: args)
         .then((onValue) {
       if (onValue != null) {
         Navigator.of(context).pop(onValue);

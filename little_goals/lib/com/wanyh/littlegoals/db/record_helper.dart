@@ -81,7 +81,7 @@ create table $tableRecords (
 
   Future<List<GoalRecord>> getRecords(int goalId) async {
     List<Map> maps = await _db
-        ?.query(tableRecords, where: '$columnGoalId=?', whereArgs: [goalId]);
+        ?.query(tableRecords, where: '$columnGoalId=?', whereArgs: [goalId],orderBy: '$columnId DESC');
     List<GoalRecord> goalList = List();
     for (Map map in maps) {
       goalList.add(GoalRecord.fromMap(map));
