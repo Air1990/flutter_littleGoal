@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:little_goals/com/wanyh/littlegoals/db/goals_helper.dart';
-import 'package:little_goals/com/wanyh/littlegoals/db/record_helper.dart';
-import 'package:little_goals/com/wanyh/littlegoals/page/setting_page.dart';
-import 'package:little_goals/com/wanyh/littlegoals/utils/const.dart';
-import 'package:little_goals/com/wanyh/littlegoals/utils/icons.dart';
+import 'package:little_goals/db/goals_helper.dart';
+import 'package:little_goals/db/record_helper.dart';
+import 'package:little_goals/page/setting_page.dart';
+import 'package:little_goals/utils/const.dart';
+import 'package:little_goals/utils/icons.dart';
 
-import 'package:little_goals/com/wanyh/littlegoals/widget/goal_gridview.dart';
-import 'package:little_goals/com/wanyh/littlegoals/widget/goal_listview.dart';
+import 'package:little_goals/widget/goal_gridview.dart';
+import 'package:little_goals/widget/goal_listview.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({
@@ -49,6 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
           if (onValue.length == 0) {
             goal.seriesSign = 0;
             setState(() {});
+            provider.close();
             return;
           }
           dateTime = DateTime.fromMillisecondsSinceEpoch(onValue[0].date);

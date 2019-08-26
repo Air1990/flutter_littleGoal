@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:little_goals/com/wanyh/littlegoals/db/goals_helper.dart';
-import 'package:little_goals/com/wanyh/littlegoals/utils/const.dart';
+import 'package:little_goals/db/goals_helper.dart';
+import 'package:little_goals/utils/const.dart';
 
 class CustomPage extends StatefulWidget {
   final LittleGoal myGoal;

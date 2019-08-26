@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:little_goals/com/wanyh/littlegoals/db/goals_helper.dart';
-import 'package:little_goals/com/wanyh/littlegoals/db/record_helper.dart';
-import 'package:little_goals/com/wanyh/littlegoals/utils/const.dart';
+import 'package:little_goals/db/goals_helper.dart';
+import 'package:little_goals/db/record_helper.dart';
+import 'package:little_goals/utils/const.dart';
 
 class GoalGridView extends Container {
   GoalGridView(this.myGoals, this.callback);

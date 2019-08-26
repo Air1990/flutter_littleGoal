@@ -1,4 +1,4 @@
-import 'package:little_goals/com/wanyh/littlegoals/db/record_helper.dart';
+import 'package:little_goals/db/record_helper.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
@@ -19,8 +19,8 @@ class LittleGoal {
   bool isLocal = true;
 
   bool isSigned = false;
-  int seriesSign;
-  int totalSign;
+  int seriesSign = 0;
+  int totalSign = 0;
 
   Map<String, dynamic> toMap() {
     var map = <String, dynamic>{
@@ -95,8 +95,7 @@ create table $tableRecords (
   }
 
   Future<List<LittleGoal>> getAllGoals() async {
-    List<Map> maps =
-        await _db?.query(tableGoals, orderBy: '$columnId ASC');
+    List<Map> maps = await _db?.query(tableGoals, orderBy: '$columnId ASC');
     List<LittleGoal> goalList = List();
     for (Map map in maps) {
       goalList.add(LittleGoal.fromMap(map));
@@ -111,6 +110,6 @@ create table $tableRecords (
 
   Future<int> delete(LittleGoal goal) async {
     return await _db
-        ?.delete(tableGoals, where: '$columnId=', whereArgs: [goal.id]);
+        ?.delete(tableGoals, where: '$columnId=?', whereArgs: [goal.id]);
   }
 }

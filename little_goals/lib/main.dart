@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:little_goals/com/wanyh/littlegoals/page/goals_detail_page.dart';
-import 'package:little_goals/com/wanyh/littlegoals/page/goals_list_page.dart';
-import 'package:little_goals/com/wanyh/littlegoals/utils/const.dart';
+import 'package:little_goals/page/goals_detail_page.dart';
+import 'package:little_goals/page/goals_list_page.dart';
+import 'package:little_goals/utils/const.dart';
 
 import 'page/add_goals_page.dart';
 import 'page/custom_goal_page.dart';

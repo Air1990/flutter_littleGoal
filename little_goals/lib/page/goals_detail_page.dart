@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:little_goals/com/wanyh/littlegoals/db/goals_helper.dart';
-import 'package:little_goals/com/wanyh/littlegoals/utils/const.dart';
+import 'package:little_goals/db/goals_helper.dart';
+import 'package:little_goals/utils/const.dart';
 
 class GoalsDetailPage extends StatefulWidget {
   final LittleGoal myGoal;
@@ -31,7 +31,15 @@ class _GoalDetailPageState extends State<GoalsDetailPage> {
                   color: Colors.grey,
                   child: Text('删除'),
                   onPressed: () {
-                    Navigator.pop(context, -1);
+                    GoalsProvider provider = GoalsProvider();
+                    provider.open(GOALS_DB_NAME).then((onValue) {
+                      provider.delete(widget.myGoal).then((onValue) {
+                        if (onValue == 1) {
+                          provider.close();
+                          Navigator.pop(context, -1);
+                        }
+                      });
+                    });
                   },
                 ),
                 RaisedButton(
