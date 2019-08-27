@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:little_goals/db/goals_helper.dart';
 import 'package:little_goals/db/record_helper.dart';
+import 'package:little_goals/utils/colors.dart';
 import 'package:little_goals/utils/const.dart';
 
 class GoalGridView extends Container {
@@ -21,44 +22,86 @@ class GoalGridView extends Container {
         return GestureDetector(
           child: Container(
             decoration: BoxDecoration(
-              color: myGoals[index].isSigned
-                  ? Colors.amber[500]
-                  : Colors.amber[100],
-              borderRadius: BorderRadius.circular(15),
+              color:
+                  myGoals[index].isSigned ? MyColors.backOn : MyColors.backNor,
+              borderRadius: BorderRadius.circular(10),
             ),
             margin: EdgeInsets.fromLTRB(8.0, 8.0, rightMargin, 0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+            child: Flex(
+              direction: Axis.vertical,
               children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.only(top: 5),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
-                    Text(
-                      myGoals[index].seriesSign.toString(),
-                      style: TextStyle(
-                        color: Colors.pink,
-                        fontSize: 20,
-                      ),
+                Expanded(
+                    flex: 1,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          myGoals[index].seriesSign.toString(),
+                          style: TextStyle(
+                            color: MyColors.textOn,
+                            fontSize: 20,
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(right: 5),
+                        ),
+                      ],
+                    )),
+                Expanded(
+                  flex: 3,
+                  child: Container(
+                    alignment: Alignment.topCenter,
+                    child: Image(
+                      image: AssetImage(myGoals[index].imageUrl),
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 10),
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Container(
+                    alignment: Alignment.topCenter,
+                    child: Text(
+                      myGoals[index].name,
+                      textAlign: TextAlign.center,
+                      maxLines: 1,
                     ),
-                  ],
-                ),
-                Image(
-                  image: AssetImage(myGoals[index].imageUrl),
-                  width: 60,
-                ),
-                Text(
-                  myGoals[index].name,
-                  textAlign: TextAlign.center,
-                  maxLines: 1,
+                  ),
                 ),
               ],
             ),
+//            child: Column(
+//              mainAxisAlignment: MainAxisAlignment.start,
+//              children: <Widget>[
+//                Padding(
+//                  padding: EdgeInsets.only(top: 5),
+//                ),
+//                Row(
+//                  mainAxisAlignment: MainAxisAlignment.end,
+//                  children: <Widget>[
+//                    Text(
+//                      myGoals[index].seriesSign.toString(),
+//                      style: TextStyle(
+//                        color: MyColors.textOn,
+//                        fontSize: 20,
+//                      ),
+//                    ),
+//                    Padding(
+//                      padding: EdgeInsets.only(left: 10),
+//                    ),
+//                  ],
+//                ),
+//                Image(
+//                  image: AssetImage(myGoals[index].imageUrl),
+//                  width: 60,
+//                ),
+//                Text(
+//                  myGoals[index].name,
+//                  textAlign: TextAlign.center,
+//                  maxLines: 1,
+//                ),
+//              ],
+//            ),
           ),
           onTap: () {
             GoalRecord record = GoalRecord();

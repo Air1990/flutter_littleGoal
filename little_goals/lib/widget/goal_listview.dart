@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:little_goals/db/goals_helper.dart';
+import 'package:little_goals/utils/colors.dart';
 import 'package:little_goals/utils/const.dart';
 
 class GoalListView extends ListView {
@@ -19,9 +20,9 @@ class GoalListView extends ListView {
               height: 80,
               decoration: BoxDecoration(
                 color: myGoals[index].isSigned
-                    ? Colors.amber[500]
-                    : Colors.amber[100],
-                borderRadius: BorderRadius.circular(8),
+                    ? MyColors.backOn
+                    : MyColors.backNor,
+                borderRadius: BorderRadius.circular(5),
               ),
               child: Wrap(
                 runAlignment: WrapAlignment.center,
@@ -53,7 +54,7 @@ class GoalListView extends ListView {
                               Text(
                                 myGoals[index].name,
                                 style: TextStyle(
-                                  color: Colors.blueAccent,
+                                  color: Colors.lightBlue,
                                   fontSize: 18,
                                 ),
                               ),
@@ -73,7 +74,7 @@ class GoalListView extends ListView {
                             children: <Widget>[
                               Text(myGoals[index].seriesSign.toString(),
                                   style: TextStyle(
-                                    color: Colors.pink,
+                                    color: MyColors.textOn,
                                     fontSize: 30,
                                   )),
                               Text(

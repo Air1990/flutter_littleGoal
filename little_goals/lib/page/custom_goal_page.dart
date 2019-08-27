@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:little_goals/db/goals_helper.dart';
+import 'package:little_goals/utils/colors.dart';
 import 'package:little_goals/utils/const.dart';
 
 class CustomPage extends StatefulWidget {
@@ -77,7 +78,7 @@ class CustomPageState extends State<CustomPage> {
         ),
         Container(
           decoration: BoxDecoration(
-              color: Colors.amber[100],
+              color: MyColors.backNor,
               borderRadius: BorderRadius.circular(10)),
           padding: EdgeInsets.all(8),
           child: Image(
@@ -92,11 +93,11 @@ class CustomPageState extends State<CustomPage> {
         Container(
           width: 150,
           decoration: BoxDecoration(
-            color: Colors.amber[100],
+            color: MyColors.backNor,
             borderRadius: BorderRadius.circular(5),
           ),
           child: TextField(
-            cursorColor: Colors.amber[500],
+            cursorColor: MyColors.backOn,
             maxLines: 1,
             controller: _nameEditingController,
             textAlign: TextAlign.center,
@@ -111,11 +112,11 @@ class CustomPageState extends State<CustomPage> {
         Container(
           width: 250,
           decoration: BoxDecoration(
-            color: Colors.amber[100],
+            color: MyColors.backNor,
             borderRadius: BorderRadius.circular(5),
           ),
           child: TextField(
-            cursorColor: Colors.amber[500],
+            cursorColor: MyColors.backOn,
             maxLines: 1,
             controller: _sloganEditingController,
             textAlign: TextAlign.center,

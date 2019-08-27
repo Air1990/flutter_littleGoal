@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:little_goals/db/goals_helper.dart';
+import 'package:little_goals/utils/colors.dart';
 import 'package:little_goals/utils/const.dart';
 
 class GoalsDetailPage extends StatefulWidget {
@@ -43,7 +44,7 @@ class _GoalDetailPageState extends State<GoalsDetailPage> {
                   },
                 ),
                 RaisedButton(
-                  color: Colors.lightBlueAccent,
+                  color: MyColors.textOn,
                   child: Text('更新'),
                   onPressed: () {
                     Map<String, dynamic> args = {

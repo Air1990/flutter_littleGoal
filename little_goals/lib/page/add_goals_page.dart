@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:little_goals/db/goals_helper.dart';
+import 'package:little_goals/utils/colors.dart';
 import 'package:little_goals/utils/const.dart';
 
 class AddGoalsPage extends StatefulWidget {
@@ -55,7 +56,7 @@ class AddGoalsPageState extends State<AddGoalsPage> {
           return GestureDetector(
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.amber[100],
+                color: MyColors.backNor,
                 borderRadius: BorderRadius.circular(15),
               ),
               margin: EdgeInsets.fromLTRB(8.0, 8.0, rightMargin, 0),
