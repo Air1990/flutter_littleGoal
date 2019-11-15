@@ -3,6 +3,7 @@ import 'package:little_goals/db/goals_helper.dart';
 import 'package:little_goals/utils/colors.dart';
 import 'package:little_goals/utils/const.dart';
 
+///添加目标，选择模版界面
 class AddGoalsPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {

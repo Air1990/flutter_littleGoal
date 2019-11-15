@@ -3,6 +3,8 @@ import 'package:little_goals/db/goals_helper.dart';
 import 'package:little_goals/utils/colors.dart';
 import 'package:little_goals/utils/const.dart';
 
+///第二个tab
+///目标详细信息
 class GoalListView extends ListView {
   GoalListView(this.myGoals, this.callback);
 

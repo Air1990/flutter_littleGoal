@@ -9,6 +9,7 @@ import 'package:little_goals/utils/icons.dart';
 import 'package:little_goals/widget/goal_gridview.dart';
 import 'package:little_goals/widget/goal_listview.dart';
 
+///管理三个tab
 class MyHomePage extends StatefulWidget {
   MyHomePage({
     Key key,

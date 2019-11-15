@@ -4,6 +4,8 @@ import 'package:little_goals/db/record_helper.dart';
 import 'package:little_goals/utils/colors.dart';
 import 'package:little_goals/utils/const.dart';
 
+///第一个tab
+///目标基本信息
 class GoalGridView extends Container {
   GoalGridView(this.myGoals, this.callback);
 

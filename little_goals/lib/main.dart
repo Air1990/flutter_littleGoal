@@ -20,8 +20,8 @@ class MyApp extends StatelessWidget {
         ADD_GOALS_PAGE: (context) => AddGoalsPage(),
         CUSTOM_GOAL_PAGE: (context) =>
             CustomPage(myArgs: ModalRoute.of(context).settings.arguments),
-        GOALS_DETAIL_PAGE: (context) => GoalsDetailPage(
-            myGoal: ModalRoute.of(context).settings.arguments),
+        GOALS_DETAIL_PAGE: (context) =>
+            GoalsDetailPage(myGoal: ModalRoute.of(context).settings.arguments),
       },
       home: MyHomePage(),
     );

@@ -3,6 +3,7 @@ import 'package:little_goals/db/goals_helper.dart';
 import 'package:little_goals/utils/colors.dart';
 import 'package:little_goals/utils/const.dart';
 
+///设置目标详细信息界面
 class CustomPage extends StatefulWidget {
   final LittleGoal myGoal;
   final int from; //0:添加页面；1:编辑页面
@@ -78,8 +79,7 @@ class CustomPageState extends State<CustomPage> {
         ),
         Container(
           decoration: BoxDecoration(
-              color: MyColors.backNor,
-              borderRadius: BorderRadius.circular(10)),
+              color: MyColors.backNor, borderRadius: BorderRadius.circular(10)),
           padding: EdgeInsets.all(8),
           child: Image(
             image: AssetImage(widget.myGoal.imageUrl),

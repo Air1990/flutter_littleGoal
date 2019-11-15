@@ -3,6 +3,7 @@ import 'package:little_goals/db/goals_helper.dart';
 import 'package:little_goals/utils/colors.dart';
 import 'package:little_goals/utils/const.dart';
 
+///删除或者更新目标
 class GoalsDetailPage extends StatefulWidget {
   final LittleGoal myGoal;
 
